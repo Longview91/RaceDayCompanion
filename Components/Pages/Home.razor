@@ -1,0 +1,149 @@
+﻿@page "/"
+
+@using System.Timers
+
+<h1>Track Stopwatch</h1>
+
+<div style="margin-bottom:1em;">
+    <label>Track Distance:</label>
+    <input type="number" min="0.01" step="0.01" @bind="TrackDistance" style="width:80px;" />
+    <select @bind="DistanceUnit">
+        <option value="Miles">Miles</option>
+        <option value="Kilometers">Kilometers</option>
+    </select>
+</div>
+
+<div style="margin-bottom:1em;">
+    <h2>Overall: @FormatTime(ElapsedTime)</h2>
+    @if (Laps.Count > 0)
+    {
+        <h3>Current Lap: @FormatTime(CurrentLapTime)</h3>
+    }
+    @if (!IsRunning && !HasStarted)
+    {
+        <button @onclick="Start">Start</button>
+    }
+    else if (IsRunning)
+    {
+        <button @onclick="Lap">Lap</button>
+        <button @onclick="Stop">Stop</button>
+    }
+    else if (!IsRunning && HasStarted)
+    {
+        <button @onclick="Reset">Reset</button>
+        <button @onclick="Resume">Resume</button>
+    }
+</div>
+
+@if (Laps.Count > 0)
+{
+    <h3>Laps</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Lap</th>
+                <th>Time</th>
+                <th>Avg Speed (@DistanceUnit per hour)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Laps.Count; i++)
+            {
+                <tr>
+                    <td>@(i + 1)</td>
+                    <td>@FormatTime(Laps[i])</td>
+                    <td>@(CalculateAverageSpeed(Laps[i]))</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    double TrackDistance { get; set; } = 1.0;
+    string DistanceUnit { get; set; } = "Miles";
+
+    TimeSpan ElapsedTime { get; set; } = TimeSpan.Zero;
+    List<TimeSpan> Laps { get; set; } = new();
+    TimeSpan LastLapTime { get; set; } = TimeSpan.Zero;
+
+    System.Timers.Timer? Timer;
+    DateTime? StartTime;
+    bool IsRunning { get; set; } = false;
+    bool HasStarted { get; set; } = false;
+
+    // New: Current lap time property
+    TimeSpan CurrentLapTime => ElapsedTime - LastLapTime;
+
+    void Start()
+    {
+        HasStarted = true;
+        IsRunning = true;
+        StartTime = DateTime.Now - ElapsedTime;
+        Timer = new System.Timers.Timer(100);
+        Timer.Elapsed += OnTimerElapsed;
+        Timer.Start();
+    }
+
+    void OnTimerElapsed(object? sender, ElapsedEventArgs e)
+    {
+        if (StartTime.HasValue)
+        {
+            ElapsedTime = DateTime.Now - StartTime.Value;
+            InvokeAsync(StateHasChanged);
+        }
+    }
+
+    void Lap()
+    {
+        var lapTime = ElapsedTime - LastLapTime;
+        Laps.Add(lapTime);
+        LastLapTime = ElapsedTime;
+    }
+
+    void Stop()
+    {
+        IsRunning = false;
+        Timer?.Stop();
+    }
+
+    void Reset()
+    {
+        Timer?.Stop();
+        ElapsedTime = TimeSpan.Zero;
+        LastLapTime = TimeSpan.Zero;
+        Laps.Clear();
+        IsRunning = false;
+        HasStarted = false;
+    }
+
+    void Resume()
+    {
+        IsRunning = true;
+        StartTime = DateTime.Now - ElapsedTime;
+        Timer?.Start();
+    }
+
+    string FormatTime(TimeSpan time)
+    {
+        return time.ToString(@"hh\:mm\:ss\.ff");
+    }
+
+    string CalculateAverageSpeed(TimeSpan lapTime)
+    {
+        if (lapTime.TotalHours == 0 || TrackDistance <= 0)
+            return "-";
+        double speed = TrackDistance / lapTime.TotalHours;
+        return speed.ToString("0.00");
+    }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+    }
+
+    public void Dispose()
+    {
+        Timer?.Dispose();
+    }
+}
