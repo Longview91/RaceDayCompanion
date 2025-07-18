@@ -15,6 +15,7 @@ namespace RaceDayCompanion
                 });
 
             builder.Services.AddMauiBlazorWebView();
+            builder.Services.AddScoped(sp => new HttpClient());
 
 #if DEBUG
     		builder.Services.AddBlazorWebViewDeveloperTools();

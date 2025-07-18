@@ -1,0 +1,492 @@
+[
+  {
+    "name": "Silverstone Circuit",
+    "length": 5.891,
+    "unit": "Kilometers"
+  },
+  {
+    "name": "Circuit de Spa-Francorchamps",
+    "length": 7.004,
+    "unit": "Kilometers"
+  },
+  {
+    "name": "Monza",
+    "length": 5.793,
+    "unit": "Kilometers"
+  },
+  {
+    "name": "Suzuka Circuit",
+    "length": 5.807,
+    "unit": "Kilometers"
+  },
+  {
+    "name": "Circuit de Monaco",
+    "length": 3.337,
+    "unit": "Kilometers"
+  },
+  {
+    "name": "Circuit Gilles Villeneuve",
+    "length": 4.361,
+    "unit": "Kilometers"
+  },
+  {
+    "name": "Interlagos",
+    "length": 4.309,
+    "unit": "Kilometers"
+  },
+  {
+    "name": "Red Bull Ring",
+    "length": 4.318,
+    "unit": "Kilometers"
+  },
+  {
+    "name": "Hungaroring",
+    "length": 4.381,
+    "unit": "Kilometers"
+  },
+  {
+    "name": "Circuit of the Americas",
+    "length": 5.513,
+    "unit": "Kilometers"
+  },
+  {
+    "name": "Yas Marina Circuit",
+    "length": 5.281,
+    "unit": "Kilometers"
+  },
+  {
+    "name": "Marina Bay Street Circuit",
+    "length": 5.063,
+    "unit": "Kilometers"
+  },
+  {
+    "name": "Bahrain International Circuit",
+    "length": 5.412,
+    "unit": "Kilometers"
+  },
+  {
+    "name": "Albert Park Circuit",
+    "length": 5.278,
+    "unit": "Kilometers"
+  },
+  {
+    "name": "Imola",
+    "length": 4.909,
+    "unit": "Kilometers"
+  },
+  {
+    "name": "Zandvoort",
+    "length": 4.259,
+    "unit": "Kilometers"
+  },
+  {
+    "name": "Jeddah Corniche Circuit",
+    "length": 6.174,
+    "unit": "Kilometers"
+  },
+  {
+    "name": "Miami International Autodrome",
+    "length": 5.412,
+    "unit": "Kilometers"
+  },
+  {
+    "name": "Las Vegas Strip Circuit",
+    "length": 6.201,
+    "unit": "Kilometers"
+  },
+  {
+    "name": "Shanghai International Circuit",
+    "length": 5.451,
+    "unit": "Kilometers"
+  },
+  {
+    "name": "Sepang International Circuit",
+    "length": 5.543,
+    "unit": "Kilometers"
+  },
+  {
+    "name": "Hockenheimring",
+    "length": 4.574,
+    "unit": "Kilometers"
+  },
+  {
+    "name": "Nürburgring GP-Strecke",
+    "length": 5.148,
+    "unit": "Kilometers"
+  },
+  {
+    "name": "Nürburgring Nordschleife",
+    "length": 20.832,
+    "unit": "Kilometers"
+  },
+  {
+    "name": "Circuit Paul Ricard",
+    "length": 5.842,
+    "unit": "Kilometers"
+  },
+  {
+    "name": "Barcelona-Catalunya",
+    "length": 4.657,
+    "unit": "Kilometers"
+  },
+  {
+    "name": "Sochi Autodrom",
+    "length": 5.848,
+    "unit": "Kilometers"
+  },
+  {
+    "name": "Baku City Circuit",
+    "length": 6.003,
+    "unit": "Kilometers"
+  },
+  {
+    "name": "Autódromo Hermanos Rodríguez",
+    "length": 4.304,
+    "unit": "Kilometers"
+  },
+  {
+    "name": "Autódromo José Carlos Pace",
+    "length": 4.309,
+    "unit": "Kilometers"
+  },
+  {
+    "name": "Circuit Zolder",
+    "length": 4.011,
+    "unit": "Kilometers"
+  },
+  {
+    "name": "Brands Hatch GP",
+    "length": 3.908,
+    "unit": "Kilometers"
+  },
+  {
+    "name": "Donington Park GP",
+    "length": 4.020,
+    "unit": "Kilometers"
+  },
+  {
+    "name": "Oulton Park International",
+    "length": 4.307,
+    "unit": "Kilometers"
+  },
+  {
+    "name": "Snetterton 300",
+    "length": 4.779,
+    "unit": "Kilometers"
+  },
+  {
+    "name": "Thruxton Circuit",
+    "length": 3.793,
+    "unit": "Kilometers"
+  },
+  {
+    "name": "Goodwood Circuit",
+    "length": 3.809,
+    "unit": "Kilometers"
+  },
+  {
+    "name": "Bathurst Mount Panorama",
+    "length": 6.213,
+    "unit": "Kilometers"
+  },
+  {
+    "name": "Phillip Island Circuit",
+    "length": 4.445,
+    "unit": "Kilometers"
+  },
+  {
+    "name": "Adelaide Street Circuit",
+    "length": 3.219,
+    "unit": "Kilometers"
+  },
+  {
+    "name": "Eastern Creek (Sydney Motorsport Park)",
+    "length": 3.930,
+    "unit": "Kilometers"
+  },
+  {
+    "name": "Laguna Seca",
+    "length": 3.602,
+    "unit": "Kilometers"
+  },
+  {
+    "name": "Sonoma Raceway",
+    "length": 4.057,
+    "unit": "Kilometers"
+  },
+  {
+    "name": "Road America",
+    "length": 4.048,
+    "unit": "Miles"
+  },
+  {
+    "name": "Watkins Glen International",
+    "length": 3.450,
+    "unit": "Miles"
+  },
+  {
+    "name": "Sebring International Raceway",
+    "length": 3.741,
+    "unit": "Miles"
+  },
+  {
+    "name": "Daytona International Speedway Oval",
+    "length": 2.500,
+    "unit": "Miles"
+  },
+  {
+    "name": "Daytona International Speedway Road Course",
+    "length": 3.560,
+    "unit": "Miles"
+  },
+  {
+    "name": "Indianapolis Motor Speedway Oval",
+    "length": 2.500,
+    "unit": "Miles"
+  },
+  {
+    "name": "Indianapolis Motor Speedway Road Course",
+    "length": 2.439,
+    "unit": "Miles"
+  },
+  {
+    "name": "Talladega Superspeedway",
+    "length": 2.660,
+    "unit": "Miles"
+  },
+  {
+    "name": "Charlotte Motor Speedway",
+    "length": 1.500,
+    "unit": "Miles"
+  },
+  {
+    "name": "Bristol Motor Speedway",
+    "length": 0.533,
+    "unit": "Miles"
+  },
+  {
+    "name": "Martinsville Speedway",
+    "length": 0.526,
+    "unit": "Miles"
+  },
+  {
+    "name": "Darlington Raceway",
+    "length": 1.366,
+    "unit": "Miles"
+  },
+  {
+    "name": "Texas Motor Speedway",
+    "length": 1.500,
+    "unit": "Miles"
+  },
+  {
+    "name": "Homestead-Miami Speedway",
+    "length": 1.500,
+    "unit": "Miles"
+  },
+  {
+    "name": "Las Vegas Motor Speedway",
+    "length": 1.500,
+    "unit": "Miles"
+  },
+  {
+    "name": "Pocono Raceway",
+    "length": 2.500,
+    "unit": "Miles"
+  },
+  {
+    "name": "Richmond Raceway",
+    "length": 0.750,
+    "unit": "Miles"
+  },
+  {
+    "name": "Kansas Speedway",
+    "length": 1.500,
+    "unit": "Miles"
+  },
+  {
+    "name": "Auto Club Speedway",
+    "length": 2.000,
+    "unit": "Miles"
+  },
+  {
+    "name": "Michigan International Speedway",
+    "length": 2.000,
+    "unit": "Miles"
+  },
+  {
+    "name": "Phoenix Raceway",
+    "length": 1.022,
+    "unit": "Miles"
+  },
+  {
+    "name": "Atlanta Motor Speedway",
+    "length": 1.540,
+    "unit": "Miles"
+  },
+  {
+    "name": "Iowa Speedway",
+    "length": 0.875,
+    "unit": "Miles"
+  },
+  {
+    "name": "Gateway Motorsports Park",
+    "length": 1.250,
+    "unit": "Miles"
+  },
+  {
+    "name": "Mosport (Canadian Tire Motorsport Park)",
+    "length": 3.957,
+    "unit": "Kilometers"
+  },
+  {
+    "name": "Circuit Trois-Rivières",
+    "length": 2.460,
+    "unit": "Kilometers"
+  },
+  {
+    "name": "Autódromo do Estoril",
+    "length": 4.182,
+    "unit": "Kilometers"
+  },
+  {
+    "name": "Autódromo Internacional do Algarve",
+    "length": 4.653,
+    "unit": "Kilometers"
+  },
+  {
+    "name": "Circuit Ricardo Tormo",
+    "length": 4.005,
+    "unit": "Kilometers"
+  },
+  {
+    "name": "Circuit de Nevers Magny-Cours",
+    "length": 4.411,
+    "unit": "Kilometers"
+  },
+  {
+    "name": "Le Mans Circuit de la Sarthe",
+    "length": 13.626,
+    "unit": "Kilometers"
+  },
+  {
+    "name": "Fuji Speedway",
+    "length": 4.563,
+    "unit": "Kilometers"
+  },
+  {
+    "name": "Okayama International Circuit",
+    "length": 3.703,
+    "unit": "Kilometers"
+  },
+  {
+    "name": "Twin Ring Motegi",
+    "length": 4.801,
+    "unit": "Kilometers"
+  },
+  {
+    "name": "Autopolis",
+    "length": 4.674,
+    "unit": "Kilometers"
+  },
+  {
+    "name": "Kyalami Grand Prix Circuit",
+    "length": 4.529,
+    "unit": "Kilometers"
+  },
+  {
+    "name": "Losail International Circuit",
+    "length": 5.380,
+    "unit": "Kilometers"
+  },
+  {
+    "name": "Jerez Circuit",
+    "length": 4.428,
+    "unit": "Kilometers"
+  },
+  {
+    "name": "Mugello Circuit",
+    "length": 5.245,
+    "unit": "Kilometers"
+  },
+  {
+    "name": "Misano World Circuit",
+    "length": 4.226,
+    "unit": "Kilometers"
+  },
+  {
+    "name": "Valencia Street Circuit",
+    "length": 5.419,
+    "unit": "Kilometers"
+  },
+  {
+    "name": "Autódromo Termas de Río Hondo",
+    "length": 4.805,
+    "unit": "Kilometers"
+  },
+  {
+    "name": "Autódromo Juan y Oscar Gálvez",
+    "length": 4.259,
+    "unit": "Kilometers"
+  },
+  {
+    "name": "Autódromo Internacional Ayrton Senna",
+    "length": 3.835,
+    "unit": "Kilometers"
+  },
+  {
+    "name": "Autódromo Internacional Nelson Piquet",
+    "length": 5.031,
+    "unit": "Kilometers"
+  },
+  {
+    "name": "Autódromo Internacional de Goiânia",
+    "length": 3.835,
+    "unit": "Kilometers"
+  },
+  {
+    "name": "Autódromo Internacional de Brasília",
+    "length": 5.475,
+    "unit": "Kilometers"
+  },
+  {
+    "name": "Autódromo Internacional de Tarumã",
+    "length": 3.016,
+    "unit": "Kilometers"
+  },
+  {
+    "name": "Autódromo Internacional de Santa Cruz do Sul",
+    "length": 3.531,
+    "unit": "Kilometers"
+  },
+  {
+    "name": "Autódromo Internacional de Londrina",
+    "length": 3.146,
+    "unit": "Kilometers"
+  },
+  {
+    "name": "Autódromo Internacional de Campo Grande",
+    "length": 3.433,
+    "unit": "Kilometers"
+  },
+  {
+    "name": "Autódromo Internacional de Cascavel",
+    "length": 3.058,
+    "unit": "Kilometers"
+  },
+  {
+    "name": "Autódromo Internacional de Guaporé",
+    "length": 3.080,
+    "unit": "Kilometers"
+  },
+  {
+    "name": "Autódromo Internacional de Velopark",
+    "length": 2.278,
+    "unit": "Kilometers"
+  },
+  {
+    "name": "Autódromo Internacional de Curitiba",
+    "length": 3.695,
+    "unit": "Kilometers"
+  }
+]

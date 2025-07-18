@@ -1,4 +1,8 @@
-﻿@page "/"
+﻿@using Microsoft.Extensions.Logging
+@using System.Text.Json
+@inject ILogger<Home> Logger
+
+@page "/"
 
 @using System.Timers
 
@@ -11,6 +15,15 @@
         <option value="Miles">Miles</option>
         <option value="Kilometers">Kilometers</option>
     </select>
+</div>
+<div style="margin-bottom:1em;">
+    <label>Track Name:</label>
+    <input type="text" @bind="TrackName" style="width:200px;" />
+    <button @onclick="LookupTrackLength" disabled="@string.IsNullOrWhiteSpace(TrackName)">Lookup</button>
+    @if (!string.IsNullOrEmpty(LookupMessage))
+    {
+        <span style="margin-left:1em;">@LookupMessage</span>
+    }
 </div>
 
 <div style="margin-bottom:1em;">
@@ -41,18 +54,18 @@
     <table>
         <thead>
             <tr>
-                <th>Lap</th>
-                <th>Time</th>
-                <th>Avg Speed (@DistanceUnit per hour)</th>
+                <th style="padding: 0.5em 1em;">Lap</th>
+                <th style="padding: 0.5em 1em; min-width: 100px;">Time</th>
+                <th style="padding: 0.5em 1em; min-width: 140px;">Avg Speed<br />(@DistanceUnit per hour)</th>
             </tr>
         </thead>
         <tbody>
             @for (int i = 0; i < Laps.Count; i++)
             {
                 <tr>
-                    <td>@(i + 1)</td>
-                    <td>@FormatTime(Laps[i])</td>
-                    <td>@(CalculateAverageSpeed(Laps[i]))</td>
+                    <td style="padding: 0.5em 1em;">@(i + 1)</td>
+                    <td style="padding: 0.5em 1em; min-width: 100px;">@FormatTime(Laps[i])</td>
+                    <td style="padding: 0.5em 1em; min-width: 140px;">@(CalculateAverageSpeed(Laps[i]))</td>
                 </tr>
             }
         </tbody>
@@ -74,6 +87,129 @@
 
     // New: Current lap time property
     TimeSpan CurrentLapTime => ElapsedTime - LastLapTime;
+
+    string TrackName { get; set; } = "";
+    string LookupMessage { get; set; } = "";
+
+    Dictionary<string, (double Length, string Unit)> TrackDatabase = new();
+
+    async Task LoadTrackDatabaseAsync()
+    {
+        try
+        {
+            using var stream = await FileSystem.OpenAppPackageFileAsync("trackdata.json");
+            var options = new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true,
+                };
+
+            var tracks = await JsonSerializer.DeserializeAsync<List<TrackInfo>>(stream, options);
+
+            if (tracks != null)
+            {
+                TrackDatabase = tracks
+                    .GroupBy(t => t.Name)
+                    .Select(g => g.First())
+                    .ToDictionary(t => t.Name, t => (t.Length, t.Unit));
+            }
+        }
+        catch (Exception ex)
+        {
+            Logger.LogError(ex, "Failed to load track database from JSON.");
+        }
+    }
+
+    async Task LookupTrackLength()
+    {
+        LookupMessage = "Looking up...";
+        StateHasChanged();
+
+        if (TrackDatabase.Count == 0)
+        {
+            await LoadTrackDatabaseAsync();
+        }
+
+        var search = TrackName.Trim();
+        // Try exact match first
+        if (TrackDatabase.TryGetValue(search, out var info))
+        {
+            TrackDistance = info.Length;
+            DistanceUnit = info.Unit;
+            LookupMessage = $"Found: {TrackDistance} {DistanceUnit}";
+            Logger.LogInformation("Track '{TrackName}' found in local DB: {TrackDistance} {DistanceUnit}", TrackName, TrackDistance, DistanceUnit);
+            return;
+        }
+
+        // Try case-insensitive partial match
+        var match = TrackDatabase.Keys
+            .FirstOrDefault(k => k.Contains(search, StringComparison.OrdinalIgnoreCase));
+
+        if (match != null)
+        {
+            var matchedInfo = TrackDatabase[match];
+            TrackDistance = matchedInfo.Length;
+            DistanceUnit = matchedInfo.Unit;
+            LookupMessage = $"Found: {match} ({TrackDistance} {DistanceUnit})";
+            Logger.LogInformation("Track '{TrackName}' matched '{Match}' in local DB: {TrackDistance} {DistanceUnit}", TrackName, match, TrackDistance, DistanceUnit);
+            return;
+        }
+
+        LookupMessage = "Track not found in local database.";
+        Logger.LogWarning("Track '{TrackName}' not found in local DB.", TrackName);
+    }
+
+    async Task LookupTrackLengthOnWeb()
+    {
+        LookupMessage = "Looking up...";
+        StateHasChanged();
+
+        try
+        {
+            using var http = new HttpClient();
+            var url = $"https://en.wikipedia.org/api/rest_v1/page/html/{Uri.EscapeDataString(TrackName)}";
+            var response = await http.GetAsync(url);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                LookupMessage = "Track not found.";
+                Logger.LogWarning("Track lookup failed for '{TrackName}'. Status code: {StatusCode}", TrackName, response.StatusCode);
+                return;
+            }
+
+            var html = await response.Content.ReadAsStringAsync();
+
+            // Try to extract a number and unit (e.g., 4.048 mi or 6.515 km) from the HTML
+            var match = System.Text.RegularExpressions.Regex.Match(html, @"(\d+(\.\d+)?)\s*(mi|km|miles|kilometers)");
+            if (match.Success)
+            {
+                var value = double.Parse(match.Groups[1].Value);
+                var unit = match.Groups[3].Value.ToLower();
+
+                if (unit.StartsWith("km") || unit == "kilometers")
+                {
+                    TrackDistance = value;
+                    DistanceUnit = "Kilometers";
+                }
+                else
+                {
+                    TrackDistance = value;
+                    DistanceUnit = "Miles";
+                }
+                LookupMessage = $"Found: {TrackDistance} {DistanceUnit}";
+                Logger.LogInformation("Track '{TrackName}' found: {TrackDistance} {DistanceUnit}", TrackName, TrackDistance, DistanceUnit);
+            }
+            else
+            {
+                LookupMessage = "Could not determine track length from page.";
+                Logger.LogWarning("Could not extract track length from HTML for '{TrackName}'.", TrackName);
+            }
+        }
+        catch (Exception ex)
+        {
+            LookupMessage = "Error during lookup.";
+            Logger.LogError(ex, "Exception occurred during track lookup for '{TrackName}'", TrackName);
+        }
+    }
 
     void Start()
     {
